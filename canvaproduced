@@ -1,0 +1,541 @@
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Colorful Testimonial Slider</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap');
+        
+        body {
+            font-family: 'Poppins', sans-serif;
+            background-color: #f8fafc;
+        }
+        
+        .testimonial-container {
+            max-width: 1000px;
+            margin: 0 auto;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .testimonial-slide {
+            position: absolute;
+            width: 100%;
+            opacity: 0;
+            transform: translateX(50px);
+            transition: all 0.5s ease;
+            pointer-events: none;
+        }
+        
+        .testimonial-slide.active {
+            opacity: 1;
+            transform: translateX(0);
+            pointer-events: all;
+            z-index: 1;
+        }
+        
+        .testimonial-card {
+            border-radius: 16px;
+            overflow: hidden;
+            transition: all 0.3s ease;
+        }
+        
+        .testimonial-card:hover {
+            transform: translateY(-5px);
+        }
+        
+        .author-image {
+            width: 80px;
+            height: 80px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 600;
+            font-size: 1.5rem;
+            color: white;
+            border: 4px solid white;
+        }
+        
+        .dot {
+            width: 12px;
+            height: 12px;
+            border-radius: 50%;
+            margin: 0 6px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+        
+        .dot.active {
+            transform: scale(1.3);
+        }
+        
+        .progress-container {
+            width: 100%;
+            height: 4px;
+            background: rgba(0,0,0,0.05);
+            border-radius: 2px;
+            overflow: hidden;
+            position: relative;
+        }
+        
+        .progress-bar {
+            height: 100%;
+            width: 0;
+            position: absolute;
+            left: 0;
+            top: 0;
+            transition: width 0.1s linear;
+        }
+        
+        .arrow-btn {
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+        
+        .arrow-btn:hover {
+            transform: translateY(-2px);
+        }
+        
+        /* Color themes for each testimonial */
+        .theme-1 {
+            --accent: #4f46e5;
+            --accent-light: #818cf8;
+            --accent-very-light: rgba(79, 70, 229, 0.15);
+            --gradient: linear-gradient(135deg, #4f46e5, #818cf8);
+        }
+        
+        .theme-2 {
+            --accent: #9333ea;
+            --accent-light: #c084fc;
+            --accent-very-light: rgba(147, 51, 234, 0.15);
+            --gradient: linear-gradient(135deg, #9333ea, #c084fc);
+        }
+        
+        .theme-3 {
+            --accent: #0ea5e9;
+            --accent-light: #38bdf8;
+            --accent-very-light: rgba(14, 165, 233, 0.15);
+            --gradient: linear-gradient(135deg, #0ea5e9, #38bdf8);
+        }
+        
+        .theme-4 {
+            --accent: #f97316;
+            --accent-light: #fb923c;
+            --accent-very-light: rgba(249, 115, 22, 0.15);
+            --gradient: linear-gradient(135deg, #f97316, #fb923c);
+        }
+        
+        .theme-5 {
+            --accent: #10b981;
+            --accent-light: #34d399;
+            --accent-very-light: rgba(16, 185, 129, 0.15);
+            --gradient: linear-gradient(135deg, #10b981, #34d399);
+        }
+        
+        .theme-6 {
+            --accent: #ec4899;
+            --accent-light: #f472b6;
+            --accent-very-light: rgba(236, 72, 153, 0.15);
+            --gradient: linear-gradient(135deg, #ec4899, #f472b6);
+        }
+        
+        .theme-7 {
+            --accent: #dc2626;
+            --accent-light: #ef4444;
+            --accent-very-light: rgba(220, 38, 38, 0.15);
+            --gradient: linear-gradient(135deg, #dc2626, #ef4444);
+        }
+        
+        .theme-shadow {
+            box-shadow: 0 10px 25px var(--accent-very-light);
+        }
+        
+        .theme-shadow:hover {
+            box-shadow: 0 15px 30px var(--accent-very-light);
+        }
+    </style>
+</head>
+<body class="py-12">
+    <div class="container mx-auto px-4">
+        <h1 class="text-4xl font-bold text-center mb-12">What People Say</h1>
+        
+        <div class="testimonial-container">
+            <div class="testimonial-slides relative h-[450px] mb-8">
+                <!-- Testimonial 1 -->
+                <div class="testimonial-slide active theme-1">
+                    <div class="testimonial-card bg-white theme-shadow">
+                        <div class="h-3 w-full" style="background: var(--gradient)"></div>
+                        <div class="p-8">
+                            <div class="flex flex-col md:flex-row gap-6 items-center md:items-start">
+                                <div class="author-image" style="background: var(--gradient); box-shadow: 0 4px 10px var(--accent-very-light);">
+                                    <span>JM</span>
+                                </div>
+                                <div class="flex-1">
+                                    <div class="mb-6">
+                                        <p class="text-gray-700 text-lg leading-relaxed">Tesla is constantly discovering new ways to spread the company vision and collaborates closely with teams to bring it to life. Her attention to detail, critical thinking, and drive make her a powerhouse.</p>
+                                    </div>
+                                    <div>
+                                        <h3 class="font-semibold text-xl" style="color: var(--accent)">Jesus Mancillas</h3>
+                                        <p class="text-gray-500">Colleague at Cybersoft</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Testimonial 2 -->
+                <div class="testimonial-slide theme-2">
+                    <div class="testimonial-card bg-white theme-shadow">
+                        <div class="h-3 w-full" style="background: var(--gradient)"></div>
+                        <div class="p-8">
+                            <div class="flex flex-col md:flex-row gap-6 items-center md:items-start">
+                                <div class="author-image" style="background: var(--gradient); box-shadow: 0 4px 10px var(--accent-very-light);">
+                                    <span>MJ</span>
+                                </div>
+                                <div class="flex-1">
+                                    <div class="mb-6">
+                                        <p class="text-gray-700 text-lg leading-relaxed">It was a pleasure to watch you create magic from afar for the conference you coordinated. Thank you, Tesla, for being the leader that you are. Now everyone knows like I do that nothing gets done without you!</p>
+                                    </div>
+                                    <div>
+                                        <h3 class="font-semibold text-xl" style="color: var(--accent)">Malaika Jenkins</h3>
+                                        <p class="text-gray-500">Manager at Cybersoft</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Testimonial 3 -->
+                <div class="testimonial-slide theme-3">
+                    <div class="testimonial-card bg-white theme-shadow">
+                        <div class="h-3 w-full" style="background: var(--gradient)"></div>
+                        <div class="p-8">
+                            <div class="flex flex-col md:flex-row gap-6 items-center md:items-start">
+                                <div class="author-image" style="background: var(--gradient); box-shadow: 0 4px 10px var(--accent-very-light);">
+                                    <span>GW</span>
+                                </div>
+                                <div class="flex-1">
+                                    <div class="mb-6">
+                                        <p class="text-gray-700 text-lg leading-relaxed">I've been working with Tesla as a freelance client for over 5 years, and she's been amazing at writing, editing, design, and odd jobs. Tesla always brings her A-game and is super dedicated to getting things done right.</p>
+                                    </div>
+                                    <div>
+                                        <h3 class="font-semibold text-xl" style="color: var(--accent)">Glenda Walltower</h3>
+                                        <p class="text-gray-500">Freelance Client</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Testimonial 4 -->
+                <div class="testimonial-slide theme-4">
+                    <div class="testimonial-card bg-white theme-shadow">
+                        <div class="h-3 w-full" style="background: var(--gradient)"></div>
+                        <div class="p-8">
+                            <div class="flex flex-col md:flex-row gap-6 items-center md:items-start">
+                                <div class="author-image" style="background: var(--gradient); box-shadow: 0 4px 10px var(--accent-very-light);">
+                                    <span>MP</span>
+                                </div>
+                                <div class="flex-1">
+                                    <div class="mb-6">
+                                        <p class="text-gray-700 text-lg leading-relaxed">At SNIC24, our own Tesla Cadena led a presentation, From Cafeteria to Community: Innovative Ways to Feed More Kids. She did a fantastic job speaking to a packed house and answering questions. Wonderful job, Tesla!</p>
+                                    </div>
+                                    <div>
+                                        <h3 class="font-semibold text-xl" style="color: var(--accent)">Molly Platts</h3>
+                                        <p class="text-gray-500">Colleague at Cybersoft</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Testimonial 5 -->
+                <div class="testimonial-slide theme-5">
+                    <div class="testimonial-card bg-white theme-shadow">
+                        <div class="h-3 w-full" style="background: var(--gradient)"></div>
+                        <div class="p-8">
+                            <div class="flex flex-col md:flex-row gap-6 items-center md:items-start">
+                                <div class="author-image" style="background: var(--gradient); box-shadow: 0 4px 10px var(--accent-very-light);">
+                                    <span>DT</span>
+                                </div>
+                                <div class="flex-1">
+                                    <div class="mb-6">
+                                        <p class="text-gray-700 text-lg leading-relaxed">Can we give Tesla Cadena a hand in keeping us organized and making sure all the details are covered for the Pennsylvania User Group Meeting? Very professional.</p>
+                                    </div>
+                                    <div>
+                                        <h3 class="font-semibold text-xl" style="color: var(--accent)">Daniel Todd</h3>
+                                        <p class="text-gray-500">Colleague at Cybersoft</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Testimonial 6 -->
+                <div class="testimonial-slide theme-6">
+                    <div class="testimonial-card bg-white theme-shadow">
+                        <div class="h-3 w-full" style="background: var(--gradient)"></div>
+                        <div class="p-8">
+                            <div class="flex flex-col md:flex-row gap-6 items-center md:items-start">
+                                <div class="author-image" style="background: var(--gradient); box-shadow: 0 4px 10px var(--accent-very-light);">
+                                    <span>CM</span>
+                                </div>
+                                <div class="flex-1">
+                                    <div class="mb-6">
+                                        <p class="text-gray-700 text-lg leading-relaxed">Working with Tesla over the past three years has been a privilege. Her leadership in marketing, data-driven decision-making, and passion for continuous learning have made a significant impact on our team.</p>
+                                    </div>
+                                    <div>
+                                        <h3 class="font-semibold text-xl" style="color: var(--accent)">Christina Mammen</h3>
+                                        <p class="text-gray-500">Colleague at Cybersoft</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Testimonial 7 (Sales Team - Red Theme) -->
+                <div class="testimonial-slide theme-7">
+                    <div class="testimonial-card bg-white theme-shadow">
+                        <div class="h-3 w-full" style="background: var(--gradient)"></div>
+                        <div class="p-8">
+                            <div class="flex flex-col md:flex-row gap-6 items-center md:items-start">
+                                <div class="author-image" style="background: var(--gradient); box-shadow: 0 4px 10px var(--accent-very-light);">
+                                    <span>ST</span>
+                                </div>
+                                <div class="flex-1">
+                                    <div class="mb-6">
+                                        <p class="text-gray-700 text-lg leading-relaxed">When things get tough, we turn to marketing to get us up the hill. You carry the responsibility of how our company and products are seen in the industry and take that charge with passion and enthusiasm. We appreciate the many hats you wear to support our goals.</p>
+                                    </div>
+                                    <div>
+                                        <h3 class="font-semibold text-xl" style="color: var(--accent)">Sales Team</h3>
+                                        <p class="text-gray-500">Colleagues at Cybersoft</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Navigation Controls -->
+            <div class="flex flex-col gap-6">
+                <!-- Progress Bar -->
+                <div class="progress-container">
+                    <div class="progress-bar theme-1" style="background: var(--gradient)"></div>
+                </div>
+                
+                <!-- Navigation Dots and Arrows -->
+                <div class="flex items-center justify-between">
+                    <button class="arrow-btn bg-white text-gray-700 hover:text-white prev-btn" style="box-shadow: 0 4px 10px var(--accent-very-light);" onclick="prevSlide()">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7" />
+                        </svg>
+                    </button>
+                    
+                    <div class="flex items-center justify-center">
+                        <div class="dot active theme-1" onclick="goToSlide(1)" style="background: var(--accent)"></div>
+                        <div class="dot theme-2" onclick="goToSlide(2)" style="background: #d1d5db"></div>
+                        <div class="dot theme-3" onclick="goToSlide(3)" style="background: #d1d5db"></div>
+                        <div class="dot theme-4" onclick="goToSlide(4)" style="background: #d1d5db"></div>
+                        <div class="dot theme-5" onclick="goToSlide(5)" style="background: #d1d5db"></div>
+                        <div class="dot theme-6" onclick="goToSlide(6)" style="background: #d1d5db"></div>
+                        <div class="dot theme-7" onclick="goToSlide(7)" style="background: #d1d5db"></div>
+                    </div>
+                    
+                    <button class="arrow-btn bg-white text-gray-700 hover:text-white next-btn" style="box-shadow: 0 4px 10px var(--accent-very-light);" onclick="nextSlide()">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" />
+                        </svg>
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <script>
+        let currentSlide = 1;
+        const totalSlides = 7;
+        let slideInterval;
+        let progressInterval;
+        let progress = 0;
+        const slideDuration = 6000; // 6 seconds per slide
+        const progressStep = 10; // Update progress every 10ms
+        
+        // Initialize the slider
+        function initSlider() {
+            // Set up hover effects for navigation dots
+            document.querySelectorAll('.dot').forEach((dot, index) => {
+                const slideNum = index + 1;
+                const themeClass = `theme-${slideNum}`;
+                const accentColor = getComputedStyle(document.querySelector(`.${themeClass}`)).getPropertyValue('--accent');
+                
+                dot.addEventListener('mouseenter', () => {
+                    if (!dot.classList.contains('active')) {
+                        dot.style.backgroundColor = accentColor;
+                        dot.style.opacity = '0.7';
+                    }
+                });
+                
+                dot.addEventListener('mouseleave', () => {
+                    if (!dot.classList.contains('active')) {
+                        dot.style.backgroundColor = '#d1d5db';
+                        dot.style.opacity = '1';
+                    }
+                });
+            });
+            
+            // Set up hover effects for arrow buttons
+            document.querySelectorAll('.arrow-btn').forEach(btn => {
+                btn.addEventListener('mouseenter', () => {
+                    const currentTheme = `theme-${currentSlide}`;
+                    const gradient = getComputedStyle(document.querySelector(`.${currentTheme}`)).getPropertyValue('--gradient');
+                    btn.style.background = gradient;
+                    btn.style.color = 'white';
+                });
+                
+                btn.addEventListener('mouseleave', () => {
+                    btn.style.background = 'white';
+                    btn.style.color = '#374151';
+                });
+            });
+            
+            // Update arrow button shadows based on current theme
+            updateArrowButtonShadows();
+            
+            // Start the automatic slideshow
+            startSlideshow();
+            
+            // Pause on hover
+            document.querySelector('.testimonial-container').addEventListener('mouseenter', pauseSlideshow);
+            document.querySelector('.testimonial-container').addEventListener('mouseleave', startSlideshow);
+        }
+        
+        // Update arrow button shadows based on current theme
+        function updateArrowButtonShadows() {
+            const currentTheme = `theme-${currentSlide}`;
+            const accentVeryLight = getComputedStyle(document.querySelector(`.${currentTheme}`)).getPropertyValue('--accent-very-light');
+            
+            document.querySelectorAll('.arrow-btn').forEach(btn => {
+                btn.style.boxShadow = `0 4px 10px ${accentVeryLight}`;
+            });
+        }
+        
+        // Go to a specific slide
+        function goToSlide(slideNumber) {
+            // Reset progress
+            resetProgress();
+            
+            // Hide all slides
+            document.querySelectorAll('.testimonial-slide').forEach(slide => {
+                slide.classList.remove('active');
+            });
+            
+            // Show the selected slide
+            document.querySelector(`.testimonial-slide:nth-child(${slideNumber})`).classList.add('active');
+            
+            // Update dots
+            document.querySelectorAll('.dot').forEach((dot, index) => {
+                const slideNum = index + 1;
+                const themeClass = `theme-${slideNum}`;
+                const accentColor = getComputedStyle(document.querySelector(`.${themeClass}`)).getPropertyValue('--accent');
+                
+                if (slideNum === slideNumber) {
+                    dot.classList.add('active');
+                    dot.style.backgroundColor = accentColor;
+                } else {
+                    dot.classList.remove('active');
+                    dot.style.backgroundColor = '#d1d5db';
+                }
+            });
+            
+            // Update progress bar color
+            const progressBar = document.querySelector('.progress-bar');
+            progressBar.className = `progress-bar theme-${slideNumber}`;
+            
+            // Update current slide
+            currentSlide = slideNumber;
+            
+            // Update arrow button shadows
+            updateArrowButtonShadows();
+        }
+        
+        // Go to the next slide
+        function nextSlide() {
+            let nextSlideNumber = currentSlide + 1;
+            if (nextSlideNumber > totalSlides) {
+                nextSlideNumber = 1;
+            }
+            goToSlide(nextSlideNumber);
+        }
+        
+        // Go to the previous slide
+        function prevSlide() {
+            let prevSlideNumber = currentSlide - 1;
+            if (prevSlideNumber < 1) {
+                prevSlideNumber = totalSlides;
+            }
+            goToSlide(prevSlideNumber);
+        }
+        
+        // Start the automatic slideshow
+        function startSlideshow() {
+            // Clear any existing intervals
+            pauseSlideshow();
+            
+            // Start progress bar animation
+            startProgress();
+            
+            // Set interval for slide change
+            slideInterval = setInterval(() => {
+                nextSlide();
+            }, slideDuration);
+        }
+        
+        // Pause the slideshow
+        function pauseSlideshow() {
+            clearInterval(slideInterval);
+            clearInterval(progressInterval);
+        }
+        
+        // Start progress bar animation
+        function startProgress() {
+            const progressBar = document.querySelector('.progress-bar');
+            progress = 0;
+            progressBar.style.width = '0%';
+            
+            progressInterval = setInterval(() => {
+                progress += (progressStep / slideDuration) * 100;
+                if (progress >= 100) {
+                    progress = 100;
+                }
+                progressBar.style.width = `${progress}%`;
+            }, progressStep);
+        }
+        
+        // Reset progress bar
+        function resetProgress() {
+            clearInterval(progressInterval);
+            progress = 0;
+            document.querySelector('.progress-bar').style.width = '0%';
+            startProgress();
+        }
+        
+        // Initialize the slider when the page loads
+        document.addEventListener('DOMContentLoaded', initSlider);
+    </script>
+</body>
+</html>
